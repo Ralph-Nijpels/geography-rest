@@ -7,10 +7,10 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"../airports"
-	"../application"
-	"../countries"
-	"../graphql"
+	airports "github.com/ralph-nijpels/geography-airports"
+	application "github.com/ralph-nijpels/geography-application"
+	countries "github.com/ralph-nijpels/geography-countries"
+	// "../graphql"
 )
 
 var theCountries *countries.Countries
@@ -98,14 +98,14 @@ func main() {
 	theCountries = countries.NewCountries(context)
 	theAirports = airports.NewAirports(context, theCountries)
 
-	graphql.Init(theCountries, theAirports)
+	// graphql.Init(theCountries, theAirports)
 
 	myRouter := mux.NewRouter()
 	myRouter.HandleFunc("/geography/countries", getCountries).Methods("GET")
 	myRouter.HandleFunc("/geography/countries/{country-code}", getCountry).Methods("GET")
 	myRouter.HandleFunc("/geography/airports", getAirports).Methods("GET")
 	myRouter.HandleFunc("/geography/airports/{airport-code}", getAirport).Methods("GET")
-	myRouter.HandleFunc("/geography/graphql", graphql.Handler).Methods("POST")
+	// myRouter.HandleFunc("/geography/graphql", graphql.Handler).Methods("POST")
 
 	http.ListenAndServe(":8090", myRouter)
 

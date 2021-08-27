@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  mongo:
+    image: "mongo:latest"
+    container_name: "rest-mongo"
+    ports:
+      - "27017-27019:27017-27019"
+    volumes:
+      - "E:\\data\\mongo\\configdb:/data/configdb"
+      - "E:\\data\\mongo\\db:/data/db"
+  rest:
+    image: "geography-rest:v1"
+    container_name: "rest-main"
+    command: "/bin/bash"
